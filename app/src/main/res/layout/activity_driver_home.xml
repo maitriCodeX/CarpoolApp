@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/cream"
+    android:padding="32dp">
+
+    <Button
+        android:id="@+id/btnOfferRide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer a Ride"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnViewRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Booking Requests" />
+
+    <Button
+        android:id="@+id/btnEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+</LinearLayout>

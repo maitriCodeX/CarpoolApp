@@ -3,6 +3,9 @@
     <style name="Base.Theme.CarpoolApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:editTextColor">#000000</item>
+        <item name="android:textColorHint">#666666</item>
     </style>
 
     <style name="Theme.CarpoolApp" parent="Base.Theme.CarpoolApp" />
