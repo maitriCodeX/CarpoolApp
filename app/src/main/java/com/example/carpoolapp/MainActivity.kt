@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToRoleSelection() {
-        startActivity(Intent(this, RoleSelectionActivity::class.java))
+        startActivity(Intent(this, DashboardActivity::class.java))
         finish()
     }
 }

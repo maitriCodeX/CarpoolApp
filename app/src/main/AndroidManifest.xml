@@ -22,6 +22,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".SignupActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -35,6 +39,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".DriverHomeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".DriverEditRideActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity

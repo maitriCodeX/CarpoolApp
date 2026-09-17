@@ -2,10 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CarpoolApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:editTextColor">#000000</item>
-        <item name="android:textColorHint">#666666</item>
+        <item name="android:textColorHint">#444444</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
     <style name="Theme.CarpoolApp" parent="Base.Theme.CarpoolApp" />

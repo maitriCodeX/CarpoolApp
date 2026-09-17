@@ -17,7 +17,29 @@ class RideListActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
         val rvRides = findViewById<RecyclerView>(R.id.rvRides)
+        val bottomNavigation = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
         rvRides.layoutManager = LinearLayoutManager(this)
+
+        bottomNavigation.selectedItemId = R.id.nav_view_rides
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, RoleSelectionActivity::class.java))
+                    true
+                }
+                R.id.nav_view_rides -> true
+                R.id.nav_history -> {
+                    startActivity(Intent(this, MyBookingsActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
 
         db.collection("rides").get()
             .addOnSuccessListener { result ->

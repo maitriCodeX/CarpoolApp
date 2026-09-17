@@ -1,5 +1,6 @@
 package com.example.carpoolapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,29 @@ class MyBookingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_bookings)
 
         val rvMyBookings = findViewById<RecyclerView>(R.id.rvMyBookings)
+        val bottomNavigation = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
         rvMyBookings.layoutManager = LinearLayoutManager(this)
+
+        bottomNavigation.selectedItemId = R.id.nav_history
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, RoleSelectionActivity::class.java))
+                    true
+                }
+                R.id.nav_view_rides -> {
+                    startActivity(Intent(this, RideListActivity::class.java))
+                    true
+                }
+                R.id.nav_history -> true
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 

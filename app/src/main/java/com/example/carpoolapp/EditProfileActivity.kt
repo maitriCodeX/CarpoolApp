@@ -1,5 +1,6 @@
 package com.example.carpoolapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,6 +25,30 @@ class EditProfileActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etNewPassword = findViewById<EditText>(R.id.etNewPassword)
         val btnSaveProfile = findViewById<Button>(R.id.btnSaveProfile)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
+        val bottomNavigation = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
+
+        bottomNavigation.selectedItemId = R.id.nav_profile
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Navigate to Home (Role Selection or specific Home)
+                    startActivity(Intent(this, RoleSelectionActivity::class.java))
+                    true
+                }
+                R.id.nav_view_rides -> {
+                    startActivity(Intent(this, RideListActivity::class.java))
+                    true
+                }
+                R.id.nav_history -> {
+                    startActivity(Intent(this, MyBookingsActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> true
+                else -> false
+            }
+        }
 
         val uid = auth.currentUser?.uid ?: ""
         etEmail.setText(auth.currentUser?.email ?: "")
@@ -55,6 +80,13 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
+        }
+
+        btnLogout.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             finish()
         }
     }
