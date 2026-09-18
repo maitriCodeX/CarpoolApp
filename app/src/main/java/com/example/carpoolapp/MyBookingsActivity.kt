@@ -49,7 +49,19 @@ class MyBookingsActivity : AppCompatActivity() {
                     booking.bookingId = doc.id
                     bookingList.add(booking)
                 }
-                rvMyBookings.adapter = MyBookingsAdapter(bookingList)
+                rvMyBookings.adapter = MyBookingsAdapter(bookingList) { booking ->
+                    val intent = Intent(this, PassengerBookingDetailsActivity::class.java)
+                    intent.putExtra("bookingId", booking.bookingId)
+                    intent.putExtra("source", booking.source)
+                    intent.putExtra("destination", booking.destination)
+                    intent.putExtra("date", booking.date)
+                    intent.putExtra("time", booking.time)
+                    intent.putExtra("price", booking.price)
+                    intent.putExtra("status", booking.status)
+                    intent.putExtra("driverId", booking.driverId)
+                    intent.putExtra("passengerEmail", booking.passengerEmail)
+                    startActivity(intent)
+                }
             }
     }
 }

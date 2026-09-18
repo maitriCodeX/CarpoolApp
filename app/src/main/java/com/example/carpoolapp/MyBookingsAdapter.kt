@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MyBookingsAdapter(private val bookings: List<Booking>) :
-    RecyclerView.Adapter<MyBookingsAdapter.MyBookingViewHolder>() {
+class MyBookingsAdapter(
+    private val bookings: List<Booking>,
+    private val onItemClick: (Booking) -> Unit
+) : RecyclerView.Adapter<MyBookingsAdapter.MyBookingViewHolder>() {
 
     class MyBookingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRoute: TextView = view.findViewById(R.id.tvMyBookingRoute)
@@ -25,7 +27,8 @@ class MyBookingsAdapter(private val bookings: List<Booking>) :
         val booking = bookings[position]
         holder.tvRoute.text = "${booking.source} → ${booking.destination}"
         holder.tvDateTime.text = "${booking.date}, ${booking.time} • ₹${booking.price}"
-        holder.tvStatus.text = "Status: ${booking.status}"
+        holder.tvStatus.text = "Status: ${booking.status.uppercase()}"
+        
         holder.tvStatus.setTextColor(
             when (booking.status) {
                 "accepted" -> Color.parseColor("#2E7D32")
@@ -33,6 +36,10 @@ class MyBookingsAdapter(private val bookings: List<Booking>) :
                 else -> Color.parseColor("#F9A825")
             }
         )
+
+        holder.itemView.setOnClickListener {
+            onItemClick(booking)
+        }
     }
 
     override fun getItemCount(): Int = bookings.size

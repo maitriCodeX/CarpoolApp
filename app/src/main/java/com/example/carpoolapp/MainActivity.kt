@@ -46,7 +46,15 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        goToRoleSelection()
+                        val user = auth.currentUser
+                        user?.reload()?.addOnCompleteListener {
+                            if (user.isEmailVerified) {
+                                goToRoleSelection()
+                            } else {
+                                Toast.makeText(this, "Please verify your email first. Check inbox/spam.", Toast.LENGTH_LONG).show()
+                                auth.signOut()
+                            }
+                        }
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

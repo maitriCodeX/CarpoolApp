@@ -24,7 +24,7 @@ class SignupActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val btnSignup = findViewById<Button>(R.id.btnSignup)
-        val btnGoToLogin = findViewById<Button>(R.id.btnGoToLogin)
+        val btnGoToLogin = findViewById<TextView>(R.id.btnGoToLogin)
 
         btnSignup.setOnClickListener {
             val email = etEmail.text.toString().trim()
@@ -44,7 +44,8 @@ class SignupActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
+                        auth.currentUser?.sendEmailVerification()
+                        Toast.makeText(this, "Account created! Check email to verify.", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, DashboardActivity::class.java)
                         startActivity(intent)
                         finish()

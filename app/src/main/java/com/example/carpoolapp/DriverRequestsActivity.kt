@@ -1,5 +1,6 @@
 package com.example.carpoolapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FieldValue
 
 class DriverRequestsActivity : AppCompatActivity() {
 
@@ -41,7 +43,12 @@ class DriverRequestsActivity : AppCompatActivity() {
                 val adapter = BookingAdapter(
                     bookingList,
                     onAccept = { booking -> updateStatus(booking, "accepted") },
-                    onReject = { booking -> updateStatus(booking, "rejected") }
+                    onReject = { booking -> updateStatus(booking, "rejected") },
+                    onChat = { booking ->
+                        val intent = Intent(this, ChatActivity::class.java)
+                        intent.putExtra("bookingId", booking.bookingId)
+                        startActivity(intent)
+                    }
                 )
                 rvRequests.adapter = adapter
             }
@@ -51,8 +58,12 @@ class DriverRequestsActivity : AppCompatActivity() {
         db.collection("bookings").document(booking.bookingId)
             .update("status", newStatus)
             .addOnSuccessListener {
+                if (newStatus == "accepted") {
+                    db.collection("rides").document(booking.rideId)
+                        .update("seats", FieldValue.increment(-1))
+                }
                 Toast.makeText(this, "Booking $newStatus", Toast.LENGTH_SHORT).show()
-                loadBookings() // refresh the list so the UI reflects the new status
+                loadBookings()
             }
     }
 }

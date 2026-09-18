@@ -31,13 +31,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRoleSwitch"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:background="@drawable/bg_active_pill"
-            android:paddingHorizontal="16dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rect_curved"
+            android:paddingHorizontal="20dp"
             android:text="Switch to Driver"
             android:textAllCaps="false"
             android:textColor="#000000"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -270,14 +270,19 @@
                     android:layout_marginBottom="24dp" />
 
                 <FrameLayout
+                    android:id="@+id/btnChangeProfilePic"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="24dp">
-                    <View
+                    android:layout_marginBottom="24dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/ivProfilePic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_inactive_circle"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_inactive_circle"
                         android:backgroundTint="#F5F5F5"/>
                     <ImageView
                         android:layout_width="40dp"
@@ -370,132 +375,127 @@
     <LinearLayout
         android:id="@+id/capsuleBottomBar"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="80dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_capsule_nav"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Tab Item 0 -->
-        <LinearLayout
-            android:id="@+id/btnTab0"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:id="@+id/ivTab0"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_home_custom"
-                app:tint="#FFFFFF" />
-            <TextView
-                android:id="@+id/tvTab0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Home"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/btnTab0"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivTab0"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_home_custom"
+                    app:tint="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvTab0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Tab Item 1 -->
-        <LinearLayout
-            android:id="@+id/btnTab1"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:id="@+id/ivTab1"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_location_custom"
-                app:tint="#FFFFFF" />
-            <TextView
-                android:id="@+id/tvTab1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Status"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/btnTab1"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivTab1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_location_custom"
+                    app:tint="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvTab1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Tab Item 2 -->
-        <LinearLayout
-            android:id="@+id/btnTab2"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:id="@+id/ivTab2"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_history_custom"
-                app:tint="#FFFFFF" />
-            <TextView
-                android:id="@+id/tvTab2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="History"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/btnTab2"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivTab2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_history_custom"
+                    app:tint="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvTab2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Tab Item 3 -->
-        <LinearLayout
-            android:id="@+id/btnTab3"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:id="@+id/ivTab3"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_profile_custom"
-                app:tint="#FFFFFF" />
-            <TextView
-                android:id="@+id/tvTab3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Profile"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/btnTab3"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivTab3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_profile_custom"
+                    app:tint="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvTab3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 

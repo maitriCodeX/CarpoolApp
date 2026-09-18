@@ -209,13 +209,12 @@ class DashboardActivity : AppCompatActivity() {
         for (i in 0..3) {
             if (i == selectedIndex) {
                 tabs[i].setBackgroundResource(R.drawable.bg_active_pill)
-                texts[i].visibility = View.VISIBLE
                 icons[i].imageTintList = ColorStateList.valueOf(Color.BLACK)
-                texts[i].setTextColor(Color.BLACK)
-            } else {
-                tabs[i].setBackgroundResource(R.drawable.bg_inactive_circle)
                 texts[i].visibility = View.GONE
+            } else {
+                tabs[i].setBackgroundResource(android.R.color.transparent)
                 icons[i].imageTintList = ColorStateList.valueOf(Color.WHITE)
+                texts[i].visibility = View.GONE
             }
         }
     }
@@ -254,6 +253,8 @@ class DashboardActivity : AppCompatActivity() {
                     ride.rideId = doc.id
                     allRidesList.add(ride)
                 }
+                // Sort by date/time descending to show new rides on top
+                allRidesList.sortByDescending { it.date + it.time }
                 displayRides(allRidesList)
             }
     }
@@ -299,7 +300,22 @@ class DashboardActivity : AppCompatActivity() {
                     booking.bookingId = doc.id
                     bookingList.add(booking)
                 }
-                recyclerView.adapter = MyBookingsAdapter(bookingList)
+                // Sort by date/time descending to show new bookings on top
+                bookingList.sortByDescending { it.date + it.time }
+
+                recyclerView.adapter = MyBookingsAdapter(bookingList) { booking ->
+                    val intent = Intent(this, PassengerBookingDetailsActivity::class.java)
+                    intent.putExtra("bookingId", booking.bookingId)
+                    intent.putExtra("source", booking.source)
+                    intent.putExtra("destination", booking.destination)
+                    intent.putExtra("date", booking.date)
+                    intent.putExtra("time", booking.time)
+                    intent.putExtra("price", booking.price)
+                    intent.putExtra("status", booking.status)
+                    intent.putExtra("driverId", booking.driverId)
+                    intent.putExtra("passengerEmail", booking.passengerEmail)
+                    startActivity(intent)
+                }
             }
     }
 
@@ -348,7 +364,12 @@ class DashboardActivity : AppCompatActivity() {
                 val adapter = BookingAdapter(
                     bookingList,
                     onAccept = { booking -> updateBookingStatus(booking, "accepted") },
-                    onReject = { booking -> updateBookingStatus(booking, "rejected") }
+                    onReject = { booking -> updateBookingStatus(booking, "rejected") },
+                    onChat = { booking ->
+                        val intent = Intent(this, ChatActivity::class.java)
+                        intent.putExtra("bookingId", booking.bookingId)
+                        startActivity(intent)
+                    }
                 )
                 rvDriverRequests.adapter = adapter
             }
@@ -390,6 +411,13 @@ class DashboardActivity : AppCompatActivity() {
         etProfilePassword = findViewById(R.id.etProfilePassword)
         btnProfileSave = findViewById(R.id.btnProfileSave)
         btnProfileLogout = findViewById(R.id.btnProfileLogout)
+        val btnChangeProfilePic = findViewById<View>(R.id.btnChangeProfilePic)
+        val ivProfilePic = findViewById<ImageView>(R.id.ivProfilePic)
+
+        btnChangeProfilePic.setOnClickListener {
+            // Placeholder for profile picture selection
+            Toast.makeText(this, "Profile picture selection coming soon!", Toast.LENGTH_SHORT).show()
+        }
 
         btnProfileSave.setOnClickListener {
             val name = etProfileName.text.toString().trim()
